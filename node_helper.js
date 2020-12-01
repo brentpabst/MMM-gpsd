@@ -6,10 +6,41 @@ module.exports = NodeHelper.create({
   start: function () {
     var self = this;
     console.log("Starting node helper for: " + self.name);
+  },
+  socketNotificationReceived: function (notification, payload) {
+    var self = this;
+
+    if (notification === "GPSD_CONNECT") {
+      self.gpsdConnect(payload.port, payload.hostname);
+    }
+  },
+
+  gpsdConnect: function (port, hostname) {
+    var self = this;
+
+    if (port === "") {
+      var error = {
+        statusCode: 400,
+        statusMessage: "gpsd port is empty",
+        responseBody: "Please add it.",
+      };
+      self.sendSocketNotification("GPSD_ERROR", { id: id, error: error });
+      return;
+    }
+
+    if (hostname === "") {
+      var error = {
+        statusCode: 400,
+        statusMessage: "gpsd hostname is empty",
+        responseBody: "Please add it.",
+      };
+      self.sendSocketNotification("GPSD_ERROR", { id: id, error: error });
+      return;
+    }
 
     var listener = new gpsd.Listener({
-      port: 2947,
-      hostname: "localhost",
+      port: port,
+      hostname: hostname,
     });
 
     listener.connect(function () {
@@ -17,7 +48,7 @@ module.exports = NodeHelper.create({
     });
 
     listener.on("TPV", function (data) {
-      console.log(JSON.stringify(data));
+      self.sendSocketNotification("GPSD_DATA", { id: id, data: data });
     });
 
     listener.watch({ class: "WATCH", json: true });
