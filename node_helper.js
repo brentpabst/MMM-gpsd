@@ -10,14 +10,13 @@ module.exports = NodeHelper.create({
     var listener = new gpsd.Listener({
       port: 2947,
       hostname: "localhost",
-      parse: false,
     });
 
     listener.connect(function () {
       console.log("GPSD Connected");
     });
 
-    listener.on("raw", function (data) {
+    listener.on("TPV", function (data) {
       console.log(data);
     });
 
