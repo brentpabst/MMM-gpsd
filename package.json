@@ -1,0 +1,22 @@
+{
+  "name": "mmm-gpsd",
+  "version": "1.0.0",
+  "description": "Displays GPS information on a Magic Mirror",
+  "main": "MMM-gpsd.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brentpabst/MMM-gpsd.git"
+  },
+  "author": "Brent Pabst",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/brentpabst/MMM-gpsd/issues"
+  },
+  "homepage": "https://github.com/brentpabst/MMM-gpsd#readme",
+  "dependencies": {
+    "node-gpsd": "^0.3.2"
+  }
+}
