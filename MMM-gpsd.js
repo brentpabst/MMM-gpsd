@@ -11,12 +11,14 @@ Module.register("MMM-gpsd", {
     text: "GPSD!!!!",
   },
 
+  gpsData = {},
+
   start: function () {
+    var self = this;
+
     console.log("Starting module: " + this.name);
 
-    this.gpsData = {};
-
-    this.setGpsdConnection();
+    self.setGpsdConnection();
   },
 
   setGpsdConnection: function () {
@@ -27,23 +29,11 @@ Module.register("MMM-gpsd", {
   },
 
   socketNotificationReceived: function (notification, payload) {
-    if (notification === "GPSD_ERROR") {
-      this.errorMessage =
-        "Error " +
-        payload.error.statusCode +
-        "(" +
-        payload.error.statusMessage +
-        "): " +
-        payload.error.responseBody;
-      Log.error(this.errorMessage);
-    }
+    var self = this;
 
     if (notification === "GPSD_DATA") {
-      console.log("Got helper data! %j", payload.data);
-
-      this.gpsData = payload.data;
-      Log.error(payload.data);
-      this.updateDom();
+      self.gpsData = payload.data;
+      self.updateDom();
     }
   },
 
