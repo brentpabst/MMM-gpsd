@@ -27,12 +27,12 @@ Module.register("MMM-gpsd", {
   },
 
   socketNotificationReceived: function (notification, payload) {
-    console.log(notification);
-    console.log(payload);
+    Log.log(notification);
+    Log.log(payload);
 
     if (notification === "GPSD_DATA") {
-      console.log("Got helper data! %j", payload.data);
-      //this.gpsData = payload.data;
+      Log.log("Got helper data! %j", payload.data);
+      this.gpsData = payload.data;
       this.updateDom(1);
     }
 
