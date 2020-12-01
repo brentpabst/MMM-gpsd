@@ -4,16 +4,20 @@
  * MIT Licensed.
  */
 Module.register("MMM-gpsd", {
-	// Default module config.
-	defaults: {
-		text: "Hello World!"
-	},
+  // Default module config.
+  defaults: {
+    text: "GPSD!!!!",
+  },
 
-	getTemplate: function () {
-		return "MMM-gpsd.njk";
-	},
+  start: function () {
+    Log.info("Starting module: " + this.name);
+  },
 
-	getTemplateData: function () {
-		return this.config;
-	}
+  getTemplate: function () {
+    return "MMM-gpsd.njk";
+  },
+
+  getTemplateData: function () {
+    return this.config;
+  },
 });
