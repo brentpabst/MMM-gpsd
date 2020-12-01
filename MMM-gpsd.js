@@ -11,10 +11,10 @@ Module.register("MMM-gpsd", {
     text: "GPSD!!!!",
   },
 
-  gpsData = {},
-
   start: function () {
     console.log("Starting module: " + this.name);
+
+    this.gpsData = { speed: 0 };
 
     this.setGpsdConnection();
   },
