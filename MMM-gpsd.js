@@ -15,6 +15,8 @@ Module.register("MMM-gpsd", {
     console.log("Starting module: " + this.name);
 
     this.gpsData = {};
+
+    this.setGpsdConnection();
   },
 
   setGpsdConnection: function () {
