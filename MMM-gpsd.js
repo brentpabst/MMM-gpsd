@@ -11,8 +11,6 @@ Module.register("MMM-gpsd", {
     text: "GPSD!!!!",
   },
 
-  gpsData = null,
-
   start: function () {
     console.log("Starting module: " + this.name);
 
