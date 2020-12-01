@@ -26,8 +26,27 @@ Module.register("MMM-gpsd", {
     });
   },
   socketNotificationReceived: function (notification, payload) {
-    console.log(notification);
     console.log(payload);
+
+    if (notification === "GPSD_ERROR") {
+      this.errorMessage =
+        "Error " +
+        payload.error.statusCode +
+        "(" +
+        payload.error.statusMessage +
+        "): " +
+        payload.error.responseBody;
+      Log.error(this.errorMessage);
+    }
+
+    if (notification === "GPSD_DATA") {
+      console.log("Got helper data! %j", payload.data);
+      this.error = false;
+
+      this.gpsData = payload.data;
+      console.log(this.gpsData);
+      this.updateDom(0);
+    }
   },
 
   getTemplate: function () {
