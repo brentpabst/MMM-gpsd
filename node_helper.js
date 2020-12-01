@@ -55,9 +55,7 @@ module.exports = NodeHelper.create({
 
     listener.on("TPV", function (data) {
       console.log("Got data from GPSD! %j", data);
-      self.sendSocketNotification("GPSD_DATA", {
-        data: data,
-      });
+      self.sendSocketNotification("GPSD_DATA", data);
     });
 
     listener.watch({ class: "WATCH", json: true });
