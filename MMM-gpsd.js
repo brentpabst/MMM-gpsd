@@ -29,12 +29,6 @@ Module.register("MMM-gpsd", {
   socketNotificationReceived: function (notification, payload) {
     console.log(payload);
 
-    if (payload.id !== this.identifier) {
-      console.log("Ignoring notification");
-      // not for this module
-      return;
-    }
-
     if (notification === "GPSD_ERROR") {
       this.errorMessage =
         "Error " +
@@ -45,6 +39,7 @@ Module.register("MMM-gpsd", {
         payload.error.responseBody;
       Log.error(this.errorMessage);
     }
+
     if (notification === "GPSD_DATA") {
       console.log("Got helper data! %j", payload.data);
       this.error = false;
