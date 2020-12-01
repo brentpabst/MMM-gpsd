@@ -11,10 +11,10 @@ Module.register("MMM-gpsd", {
     text: "GPSD!!!!",
   },
 
+  gpsData = {},
+
   start: function () {
     console.log("Starting module: " + this.name);
-
-    this.gpsData = {};
 
     this.setGpsdConnection();
   },
@@ -27,13 +27,14 @@ Module.register("MMM-gpsd", {
   },
 
   socketNotificationReceived: function (notification, payload) {
+    var self = this;
     Log.log(notification);
     Log.log(payload);
 
     if (notification === "GPSD_DATA") {
       Log.log("Got helper data! %j", payload.data);
-      this.gpsData = payload.data;
-      this.updateDom(1);
+      self.gpsData = payload.data;
+      self.updateDom();
     }
 
     /* if (notification === "GPSD_ERROR") {
