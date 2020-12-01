@@ -30,6 +30,12 @@ Module.register("MMM-gpsd", {
     console.log(notification);
     console.log(payload);
 
+    if (notification === "GPSD_DATA") {
+      console.log("Got helper data! %j", payload.data);
+      //this.gpsData = payload.data;
+      this.updateDom(1);
+    }
+
     /* if (notification === "GPSD_ERROR") {
       this.errorMessage =
         "Error " +
