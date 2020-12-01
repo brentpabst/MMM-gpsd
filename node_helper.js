@@ -17,7 +17,7 @@ module.exports = NodeHelper.create({
     });
 
     listener.on("TPV", function (data) {
-      console.log(data);
+      console.log("GPS Data: %j", data);
     });
 
     listener.watch({ class: "WATCH", nmea: true });
