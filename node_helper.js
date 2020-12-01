@@ -20,6 +20,6 @@ module.exports = NodeHelper.create({
       console.log(JSON.stringify(data));
     });
 
-    listener.watch({ class: "WATCH", nmea: true });
+    listener.watch({ class: "WATCH", json: true });
   },
 });
