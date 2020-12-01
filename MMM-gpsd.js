@@ -25,10 +25,12 @@ Module.register("MMM-gpsd", {
       hostname: this.config.hostname,
     });
   },
+
   socketNotificationReceived: function (notification, payload) {
+    console.log(notification);
     console.log(payload);
 
-    if (notification === "GPSD_ERROR") {
+    /* if (notification === "GPSD_ERROR") {
       this.errorMessage =
         "Error " +
         payload.error.statusCode +
@@ -46,7 +48,7 @@ Module.register("MMM-gpsd", {
       this.gpsData = payload.data;
       console.log(this.gpsData);
       this.updateDom(0);
-    }
+    } */
   },
 
   getTemplate: function () {
