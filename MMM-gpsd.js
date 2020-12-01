@@ -10,7 +10,7 @@ Module.register("MMM-gpsd", {
   },
 
   start: function () {
-    Log.info("Starting module: " + this.name);
+    console.log("Starting module: " + this.name);
   },
 
   getTemplate: function () {

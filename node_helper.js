@@ -1,5 +1,5 @@
 const NodeHelper = require("node_helper");
-const gpsd = require("gpsd");
+const gpsd = require("node-gpsd");
 
 module.exports = NodeHelper.create({
   // Subclass start method.
@@ -14,11 +14,11 @@ module.exports = NodeHelper.create({
     });
 
     listener.connect(function () {
-      Log.info("GPSD Connected");
+      console.log("GPSD Connected");
     });
 
     listener.on("raw", function (data) {
-      Log.info(data);
+      console.log(data);
     });
 
     listener.watch({ class: "WATCH", nmea: true });
