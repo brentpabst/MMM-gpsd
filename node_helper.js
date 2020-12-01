@@ -24,7 +24,10 @@ module.exports = NodeHelper.create({
         statusMessage: "gpsd port is empty",
         responseBody: "Please add it.",
       };
-      self.sendSocketNotification("GPSD_ERROR", { id: id, error: error });
+      self.sendSocketNotification("GPSD_ERROR", {
+        id: this.identifier,
+        error: error,
+      });
       return;
     }
 
@@ -34,7 +37,10 @@ module.exports = NodeHelper.create({
         statusMessage: "gpsd hostname is empty",
         responseBody: "Please add it.",
       };
-      self.sendSocketNotification("GPSD_ERROR", { id: id, error: error });
+      self.sendSocketNotification("GPSD_ERROR", {
+        id: this.identifier,
+        error: error,
+      });
       return;
     }
 
@@ -49,7 +55,10 @@ module.exports = NodeHelper.create({
 
     listener.on("TPV", function (data) {
       console.log(data);
-      self.sendSocketNotification("GPSD_DATA", { id: id, data: data });
+      self.sendSocketNotification("GPSD_DATA", {
+        id: this.identifier,
+        data: data,
+      });
     });
 
     listener.watch({ class: "WATCH", json: true });
