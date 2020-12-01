@@ -30,6 +30,7 @@ Module.register("MMM-gpsd", {
     console.log(payload);
 
     if (payload.id !== this.identifier) {
+      console.log("Ignoring notification");
       // not for this module
       return;
     }
@@ -45,11 +46,12 @@ Module.register("MMM-gpsd", {
       Log.error(this.errorMessage);
     }
     if (notification === "GPSD_DATA") {
+      console.log("Got helper data! %j", payload.data);
       this.error = false;
 
       this.gpsData = payload.data;
       console.log(this.gpsData);
-      this.updateDom(5);
+      this.updateDom(0);
     }
   },
 
