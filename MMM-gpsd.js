@@ -46,6 +46,7 @@ Module.register("MMM-gpsd", {
       this.error = false;
 
       this.gpsData = payload.data;
+      console.log(this.gpsData);
       this.updateDom(5);
     }
   },
