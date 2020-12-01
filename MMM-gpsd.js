@@ -14,7 +14,7 @@ Module.register("MMM-gpsd", {
   start: function () {
     console.log("Starting module: " + this.name);
 
-    this.gpsData = { speed: 0 };
+    this.gpsData = {};
 
     this.setGpsdConnection();
   },
@@ -40,11 +40,10 @@ Module.register("MMM-gpsd", {
 
     if (notification === "GPSD_DATA") {
       console.log("Got helper data! %j", payload.data);
-      this.error = false;
 
       this.gpsData = payload.data;
-      console.log(this.gpsData);
-      this.updateDom(0);
+      Log.error(payload.data);
+      this.updateDom();
     }
   },
 
