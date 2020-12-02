@@ -3,15 +3,12 @@ const gpsd = require("node-gpsd");
 
 module.exports = NodeHelper.create({
   start: function () {
-    var self = this;
     console.log("Starting node helper for: " + self.name);
   },
 
   socketNotificationReceived: function (notification, payload) {
-    var self = this;
-
     if (notification === "GPSD_CONNECT") {
-      self.gpsdConnect(payload.port, payload.hostname);
+      this.gpsdConnect(payload.port, payload.hostname);
     }
   },
 
@@ -27,7 +24,7 @@ module.exports = NodeHelper.create({
 
     listener.on("TPV", function (data) {
       console.log("Got data from GPSD! %j", data);
-      self.sendSocketNotification("GPSD_DATA", data);
+      this.sendSocketNotification("GPSD_DATA", data);
     });
 
     listener.watch({ class: "WATCH", json: true });
