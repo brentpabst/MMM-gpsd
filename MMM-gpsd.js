@@ -27,10 +27,8 @@ Module.register("MMM-gpsd", {
   },
 
   socketNotificationReceived: function (notification, payload) {
-    if (notification === "GPSD_DATA") {
-      this.gpsData = payload.data;
-      this.updateDom();
-    }
+    Log.log(notification);
+    Log.log(payload);
   },
 
   getTemplate: function () {
