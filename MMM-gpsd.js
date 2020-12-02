@@ -27,8 +27,7 @@ Module.register("MMM-gpsd", {
   },
 
   socketNotificationReceived: function (notification, payload) {
-    Log.log(notification);
-    Log.log(payload);
+    console.log(payload);
   },
 
   getTemplate: function () {
