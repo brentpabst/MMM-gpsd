@@ -13,6 +13,8 @@ module.exports = NodeHelper.create({
   },
 
   gpsdConnect: function (port, hostname) {
+    var self = this;
+
     var listener = new gpsd.Listener({
       port: port,
       hostname: hostname,
@@ -24,7 +26,7 @@ module.exports = NodeHelper.create({
 
     listener.on("TPV", function (data) {
       console.log("Got data from GPSD! %j", data);
-      this.sendSocketNotification("GPSD_DATA", data);
+      self.sendSocketNotification("GPSD_DATA", data);
     });
 
     listener.watch({ class: "WATCH", json: true });
