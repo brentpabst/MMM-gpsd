@@ -1,9 +1,35 @@
-<!--
-	Use ` | safe` to allow html tages within the text string.
-	https://mozilla.github.io/nunjucks/templating.html#autoescaping
--->
-<div>
-{{config.text | safe}}
-<br />
-Time: {{current.time}} | Speed: {{current.speed}}
-</div>
+{% if current %}
+  <div class="normal medium">
+    <span class="fa fa-compass dimmed"></span>
+    <span>
+      {{current.track}}
+      <sup>
+        {{ current.track | direction | translate }}
+        &nbsp;
+      </sup>
+    </span>
+    <span class="fa fa-clock-o dimmed"></span>
+    <span>{{current.time | formatTime}}</span>
+  </div>
+  <div class="large light">
+    <span class="bright">
+      {{ current.speed | speed }}
+    </span>
+  </div>
+  <div class="small">
+    <span class="fa fa-arrows-alt-v fa-fw dimmed"></span>
+    <span>Latitude: {{current.lat}}</span>
+    <br/>
+    <span class="fa fa-arrows-alt-h fa-fw dimmed"></span>
+    <span>Longitude: {{current.lon}}</span>
+  </div>
+{% else %}
+  <div class="dimmed light small">
+    {{ "LOADING" | translate | safe }}
+  </div>
+{% endif %}
+
+{% if config.debug %}
+  <!-- Uncomment the line below to see the contents of the `current` object. -->
+  <div class="xsmall dimmed">{{current | dump}}</div>
+{% endif %}

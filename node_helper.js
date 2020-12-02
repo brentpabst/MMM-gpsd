@@ -17,7 +17,7 @@ module.exports = NodeHelper.create({
 
     var listener = new gpsd.Listener({
       port: port,
-      hostname: hostname,
+      hostname: hostname
     });
 
     listener.connect(function () {
@@ -29,5 +29,5 @@ module.exports = NodeHelper.create({
     });
 
     listener.watch({ class: "WATCH", json: true });
-  },
+  }
 });
