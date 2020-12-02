@@ -2,7 +2,7 @@
   <div class="normal medium">
     <span class="fa fa-compass dimmed"></span>
     <span>
-      {{current.track}}
+      {{current.track | roundValue }}
       <sup>
         {{ current.track | direction | translate }}
         &nbsp;

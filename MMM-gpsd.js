@@ -6,12 +6,15 @@
 Module.register("MMM-gpsd", {
   // Default module config.
   defaults: {
-    port: 2947,
-    hostname: "localhost",
     header: "GPS Details",
+
     units: config.units,
     timeFormat: 12,
-    debug: true
+
+    port: 2947,
+    hostname: "localhost",
+
+    debug: false
   },
 
   start: function () {
@@ -55,6 +58,13 @@ Module.register("MMM-gpsd", {
   },
 
   addFilters() {
+    this.nunjucksEnvironment().addFilter(
+      "roundValue",
+      function (value) {
+        return Math.round(value);
+      }.bind(this)
+    );
+
     this.nunjucksEnvironment().addFilter(
       "speed",
       function (speed) {
