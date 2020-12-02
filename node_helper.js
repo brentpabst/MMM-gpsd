@@ -3,7 +3,7 @@ const gpsd = require("node-gpsd");
 
 module.exports = NodeHelper.create({
   start: function () {
-    console.log("Starting node helper for: " + self.name);
+    console.log("Starting node helper for: " + this.name);
   },
 
   socketNotificationReceived: function (notification, payload) {
