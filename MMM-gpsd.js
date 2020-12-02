@@ -11,14 +11,12 @@ Module.register("MMM-gpsd", {
     text: "GPSD!!!!",
   },
 
-  gpsData = {},
-
   start: function () {
-    var self = this;
-
     console.log("Starting module: " + this.name);
 
-    self.setGpsdConnection();
+    this.gpsData = {};
+
+    this.setGpsdConnection();
   },
 
   setGpsdConnection: function () {
@@ -29,11 +27,9 @@ Module.register("MMM-gpsd", {
   },
 
   socketNotificationReceived: function (notification, payload) {
-    var self = this;
-
     if (notification === "GPSD_DATA") {
-      self.gpsData = payload.data;
-      self.updateDom();
+      this.gpsData = payload.data;
+      this.updateDom();
     }
   },
 
