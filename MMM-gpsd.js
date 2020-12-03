@@ -32,6 +32,10 @@ Module.register("MMM-gpsd", {
 
   socketNotificationReceived: function (notification, payload) {
     if (notification === "GPSD_DATA") {
+      // Handle no movement
+      if (!payload.speed) {
+        payload.speed = 0;
+      }
       this.gpsData = { ...this.gpsData, ...payload };
       this.updateDom();
     }
