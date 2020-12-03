@@ -14,7 +14,9 @@ Module.register("MMM-gpsd", {
     port: 2947,
     hostname: "localhost",
 
-    debug: false
+    debug: false,
+    showDevice: false,
+    showMode: false
   },
 
   start: function () {
@@ -62,6 +64,21 @@ Module.register("MMM-gpsd", {
       "roundValue",
       function (value) {
         return Math.round(value);
+      }.bind(this)
+    );
+
+    this.nunjucksEnvironment().addFilter(
+      "gpsMode",
+      function (mode) {
+        if (mode === 0) {
+          return "Not Active";
+        } else if (mode === 1) {
+          return "Acquiring Fix";
+        } else if (mode === 2) {
+          return "2D Fix";
+        } else if (mode === 3) {
+          return "3D Fix";
+        }
       }.bind(this)
     );
 

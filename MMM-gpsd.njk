@@ -1,4 +1,16 @@
 {% if current %}
+  {% if config.showDevice %}
+    <div class="small">
+      <span class="fa fa-satellite-dish fa-fw dimmed"></span>
+      <span>{{current.device}}</span>
+    </div>
+  {% endif %}
+  {% if config.showMode %}
+    <div class="small">
+      <span class="fa fa-map-marker fa-fw dimmed"></span>
+      <span>{{current.mode | gpsMode}}</span>
+    </div>
+  {% endif %}
   <div class="normal medium">
     <span class="fa fa-compass dimmed"></span>
     <span>
