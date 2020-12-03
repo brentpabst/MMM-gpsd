@@ -39,6 +39,9 @@ Module.register("MMM-gpsd", {
         payload.speed = 0;
       }
       this.gpsDeviceData = { ...this.gpsData, ...payload };
+
+      this.sendNotification("GPS_DATA", this.gpsDeviceData);
+
       this.updateDom();
     }
 
