@@ -1,39 +1,45 @@
-{% if current %}
+{% if gps %}
   {% if config.showDevice %}
     <div class="small">
       <span class="fa fa-satellite-dish fa-fw dimmed"></span>
-      <span>{{current.device}}</span>
+      <span>{{gps.device}}</span>
     </div>
   {% endif %}
   {% if config.showMode %}
     <div class="small">
       <span class="fa fa-map-marker fa-fw dimmed"></span>
-      <span>{{current.mode | gpsMode}}</span>
+      <span>{{gps.mode | gpsMode}}</span>
     </div>
   {% endif %}
   <div class="normal medium">
     <span class="fa fa-compass dimmed"></span>
     <span>
-      {{current.track | roundValue }}
+      {{ gps.track | roundValue }}
       <sup>
-        {{ current.track | direction | translate }}
+        {{ gps.track | direction | translate }}
         &nbsp;
       </sup>
     </span>
     <span class="fa fa-clock-o dimmed"></span>
-    <span>{{current.time | formatTime}}</span>
+    <span>{{gps.time | formatTime}}</span>
   </div>
   <div class="large light">
     <span class="bright">
-      {{ current.speed | speed }}
+      {{ gps.speed | speed }}
     </span>
   </div>
+  {% if config.showSats %}
+    <div class="small">
+      <span class="fa fa-satellite fa-fw dimmed"></span>
+      <span>{{sky.satellites.length}}</span>
+    </div>
+  {% endif %}
   <div class="small">
     <span class="fa fa-arrows-alt-v fa-fw dimmed"></span>
-    <span>Latitude: {{current.lat}}</span>
+    <span>Latitude: {{gps.lat}}</span>
     <br/>
     <span class="fa fa-arrows-alt-h fa-fw dimmed"></span>
-    <span>Longitude: {{current.lon}}</span>
+    <span>Longitude: {{gps.lon}}</span>
   </div>
 {% else %}
   <div class="dimmed light small">
@@ -43,5 +49,9 @@
 
 {% if config.debug %}
   <!-- Uncomment the line below to see the contents of the `current` object. -->
-  <div class="xsmall dimmed">{{current | dump}}</div>
+  <div class="xsmall dimmed">
+  TPV: {{gps | dump}}
+    <br/>
+  SKY: {{sky | dump}}
+  </div>
 {% endif %}

@@ -25,7 +25,11 @@ module.exports = NodeHelper.create({
     });
 
     listener.on("TPV", function (data) {
-      self.sendSocketNotification("GPSD_DATA", data);
+      self.sendSocketNotification("GPSD_DEVICE_DATA", data);
+    });
+
+    listener.on("SKY", function (data) {
+      self.sendSocketNotification("GPSD_SKY_DATA", data);
     });
 
     listener.watch({ class: "WATCH", json: true });

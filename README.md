@@ -42,12 +42,15 @@ modules:[
 
 | Option       | Description                                     | Default        |
 | ------------ | ----------------------------------------------- | -------------- |
-| `header`     | The header text to display                      | GPS Details    |
+| `header`     | The header text to display                      | `GPS Details`  |
 | `units`      | System of measure one of `metric` or `imperial` | Global Default |
-| `timeFormat` | Time format to leverage one of `12` or `24`     | 12             |
-| `hostname`   | The hostname of the GPSD instance               | localhost      |
-| `port`       | The TCP port of the GPSD instance               | 2947           |
-| `debug`      | Display full GPSD JSON data on screen           | false          |
+| `timeFormat` | Time format to leverage one of `12` or `24`     | `12`           |
+| `hostname`   | The hostname of the GPSD instance               | `localhost`    |
+| `port`       | The TCP port of the GPSD instance               | `2947`         |
+| `debug`      | Display full GPSD JSON data on screen           | `false`        |
+| `showDevice` | Show the name of the current receiver device    | `false`        |
+| `showMode`   | Show the current mode of the GPS receiver       | `false`        |
+| `showSats`   | Display current count of satellites             | `true`         |
 
 ## Development
 

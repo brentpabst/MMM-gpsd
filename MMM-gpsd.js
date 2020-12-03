@@ -16,7 +16,8 @@ Module.register("MMM-gpsd", {
 
     debug: false,
     showDevice: false,
-    showMode: false
+    showMode: false,
+    showSats: true
   },
 
   start: function () {
@@ -25,18 +26,24 @@ Module.register("MMM-gpsd", {
     // Add custom filters
     this.addFilters();
 
-    this.gpsData = null;
+    this.gpsDeviceData = null;
+    this.gpsSkyData = null;
 
     this.setGpsdConnection();
   },
 
   socketNotificationReceived: function (notification, payload) {
-    if (notification === "GPSD_DATA") {
+    if (notification === "GPSD_DEVICE_DATA") {
       // Handle no movement
       if (!payload.speed) {
         payload.speed = 0;
       }
-      this.gpsData = { ...this.gpsData, ...payload };
+      this.gpsDeviceData = { ...this.gpsData, ...payload };
+      this.updateDom();
+    }
+
+    if (notification === "GPSD_SKY_DATA") {
+      this.gpsSkyData = { ...this.gpsSkyData, ...payload };
       this.updateDom();
     }
   },
@@ -55,7 +62,8 @@ Module.register("MMM-gpsd", {
   getTemplateData: function () {
     return {
       config: this.config,
-      current: this.gpsData
+      gps: this.gpsDeviceData,
+      sky: this.gpsSkyData
     };
   },
 
