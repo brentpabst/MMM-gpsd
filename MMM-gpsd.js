@@ -83,6 +83,13 @@ Module.register("MMM-gpsd", {
     );
 
     this.nunjucksEnvironment().addFilter(
+      "roundCoord",
+      function (value) {
+        return value.toFixed(5);
+      }.bind(this)
+    );
+
+    this.nunjucksEnvironment().addFilter(
       "gpsMode",
       function (mode) {
         if (mode === 0) {

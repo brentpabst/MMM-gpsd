@@ -36,10 +36,10 @@
   {% endif %}
   <div class="small">
     <span class="fa fa-arrows-alt-v fa-fw dimmed"></span>
-    <span>Latitude: {{gps.lat}}</span>
+    <span>Latitude: {{gps.lat | roundCoord}}</span>
     <br/>
     <span class="fa fa-arrows-alt-h fa-fw dimmed"></span>
-    <span>Longitude: {{gps.lon}}</span>
+    <span>Longitude: {{gps.lon | roundCoord}}</span>
   </div>
 {% else %}
   <div class="dimmed light small">
